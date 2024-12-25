@@ -61,9 +61,8 @@ public class Bullet : MonoBehaviour
             // 销毁子弹
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Obstacle"))
+        else if (collision.CompareTag("Block1") || collision.CompareTag("Block2") || collision.CompareTag("Block3"))
         {
-            // 碰到障碍物时销毁子弹
             Destroy(gameObject);
         }
     }
