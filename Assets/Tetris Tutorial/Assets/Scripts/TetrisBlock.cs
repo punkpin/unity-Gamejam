@@ -72,6 +72,8 @@ public class TetrisBlock : MonoBehaviour
             {
                 DeleteLine(i);
                 RowDown(i);
+                // add 24.12.25 by junpaku
+                ScoreManager.Score = ScoreManager.Score + 100;
             }
         }
     }
