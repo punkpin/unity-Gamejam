@@ -130,4 +130,23 @@ public class EnemyController : MonoBehaviour
 
         }
     }
+
+    // add 24.12.25 怪物血量、受伤相关 by junpaku
+    #region 怪物血量、受伤相关
+    public int health = 3; // 怪物的生命值
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // 怪物死亡逻辑
+        Destroy(gameObject);
+    }
+    #endregion
 }

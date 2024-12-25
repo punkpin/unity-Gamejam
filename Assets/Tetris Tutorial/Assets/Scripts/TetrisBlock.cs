@@ -51,6 +51,11 @@ public class TetrisBlock : MonoBehaviour
             transform.position += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
+                if (GameConst.PLAYER_IS_IN_BLOCK)
+                {
+                    Debug.Log("Player is dead");
+                }
+
                 SetAllChildTrigger();
                 transform.position -= new Vector3(0, -1, 0);
                 AddToGrid();
