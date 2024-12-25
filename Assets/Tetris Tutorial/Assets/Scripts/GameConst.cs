@@ -13,4 +13,7 @@ public class GameConst
 
     // 玩家是否在方块内部
     public static bool PLAYER_IS_IN_BLOCK = false;
+
+    // 玩家是否死亡
+    public static bool PLAYER_IS_DEAD = false;
 }

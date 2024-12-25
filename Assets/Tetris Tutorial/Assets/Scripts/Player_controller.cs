@@ -56,6 +56,17 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.enabled = true; // 恢复玩家的显示
             }
         }
+
+        // add 24.12.25 增加玩家死亡判定 by junpaku
+        if (HealthSystem.Instance.hitPoint <= 0)
+        {
+            GameConst.PLAYER_IS_DEAD = true;
+        }
+
+        if (GameConst.PLAYER_IS_DEAD)
+        {
+            Die();
+        }
     }
 
     void FixedUpdate()

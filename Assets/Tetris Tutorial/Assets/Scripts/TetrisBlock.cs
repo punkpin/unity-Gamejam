@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TetrisBlock : MonoBehaviour
@@ -51,9 +52,11 @@ public class TetrisBlock : MonoBehaviour
             transform.position += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
+                // add 24.12.25 玩家被方块压扁即死亡 by junpaku
                 if (GameConst.PLAYER_IS_IN_BLOCK)
                 {
-                    Debug.Log("Player is dead");
+                    GameConst.PLAYER_IS_DEAD = true;
+                    Debug.Log("Player is killed by cube");
                 }
 
                 SetAllChildTrigger();
