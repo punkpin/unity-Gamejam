@@ -140,6 +140,7 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            ScoreManager.Score = ScoreManager.Score + 10;
         }
     }
 
