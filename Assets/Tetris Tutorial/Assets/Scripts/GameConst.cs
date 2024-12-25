@@ -8,6 +8,9 @@ public class GameConst
     // 子弹速度
     public static float BULLET_SPEED = 10f;
 
+    // 子弹射击间隔
+    public static float BULLET_INTERVAL = 0.4f; 
+
     // 玩家是否在方块内部
     public static bool PLAYER_IS_IN_BLOCK = false;
 }

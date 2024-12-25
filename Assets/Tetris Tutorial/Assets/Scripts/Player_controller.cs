@@ -142,7 +142,6 @@ public class PlayerController : MonoBehaviour
     #region 子弹射击功能
     public GameObject[] bulletPrefabs; // 不同类型的子弹预制体
     public Transform shootPoint;       // 子弹发射点
-    public float shootInterval = 0.5f; // 自动射击间隔（秒）
     public static float bulletSpeed = 10f;    // 子弹速度
 
     private int currentBulletIndex = 0;
@@ -172,7 +171,7 @@ public class PlayerController : MonoBehaviour
         while (true)
         {
             Shoot();
-            yield return new WaitForSeconds(shootInterval);
+            yield return new WaitForSeconds(GameConst.BULLET_INTERVAL);
         }
     }
 

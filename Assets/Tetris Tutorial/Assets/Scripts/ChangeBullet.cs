@@ -21,16 +21,16 @@ public class ChangeBullet : MonoBehaviour
         switch (collision.tag)
         {
             case "Block1":
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
             case "Block2":
-                GameConst.BULLET_SPEED = 20f;
+                GameConst.BULLET_INTERVAL = 0.2f;
                 break;
             case "Block3":
-                GameConst.BULLET_SPEED = 40f;
+                GameConst.BULLET_INTERVAL = 0.1f;
                 break;
             default:
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
         }
     }
@@ -40,16 +40,16 @@ public class ChangeBullet : MonoBehaviour
         switch (collision.tag)
         {
             case "Block1":
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
             case "Block2":
-                GameConst.BULLET_SPEED = 20f;
+                GameConst.BULLET_INTERVAL = 0.2f;
                 break;
             case "Block3":
-                GameConst.BULLET_SPEED = 40f;
+                GameConst.BULLET_INTERVAL = 0.1f;
                 break;
             default:
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
         }
     }
@@ -59,16 +59,16 @@ public class ChangeBullet : MonoBehaviour
         switch (collision.tag)
         {
             case "Block1":
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
             case "Block2":
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
             case "Block3":
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
             default:
-                GameConst.BULLET_SPEED = 10f;
+                GameConst.BULLET_INTERVAL = 0.4f;
                 break;
         }
     }
