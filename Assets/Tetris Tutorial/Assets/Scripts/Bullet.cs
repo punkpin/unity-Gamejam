@@ -1,26 +1,26 @@
-// add 24.12.25 ×Óµ¯½Å±¾ by junpaku
+ï»¿// add 24.12.25 å­å¼¹è„šæœ¬ by junpaku
 
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed;        // ×Óµ¯ËÙ¶È
-    private int damage;         // ×Óµ¯ÉËº¦
-    private Vector2 direction;  // ×Óµ¯·½Ïò
+    private float speed;        // å­å¼¹é€Ÿåº¦
+    private int damage;         // å­å¼¹ä¼¤å®³
+    private Vector2 direction;  // å­å¼¹æ–¹å‘
 
-    // ÉèÖÃ×Óµ¯ËÙ¶È
+    // è®¾ç½®å­å¼¹é€Ÿåº¦
     public void SetSpeed(float bulletSpeed)
     {
         speed = bulletSpeed;
     }
 
-    // ÉèÖÃ×Óµ¯ÉËº¦
+    // è®¾ç½®å­å¼¹ä¼¤å®³
     public void SetDamage(int bulletDamage)
     {
         damage = bulletDamage;
     }
 
-    // ÉèÖÃ×Óµ¯·½Ïò
+    // è®¾ç½®å­å¼¹æ–¹å‘
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
@@ -28,19 +28,19 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        // ×Óµ¯ÒÆ¶¯
+        // å­å¼¹ç§»åŠ¨
         transform.Translate(direction * speed * Time.deltaTime);
 
-        // ¼ì²â×Óµ¯ÊÇ·ñ³¬³öÆÁÄ»±ß½ç
+        // æ£€æµ‹å­å¼¹æ˜¯å¦è¶…å‡ºå±å¹•è¾¹ç•Œ
         CheckOutOfBounds();
     }
 
     void CheckOutOfBounds()
     {
-        // »ñÈ¡×Óµ¯ÔÚÆÁÄ»ÉÏµÄÎ»ÖÃ
+        // è·å–å­å¼¹åœ¨å±å¹•ä¸Šçš„ä½ç½®
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
 
-        // Èç¹û³¬³öÆÁÄ»·¶Î§ÔòÏú»Ù
+        // å¦‚æœè¶…å‡ºå±å¹•èŒƒå›´åˆ™é”€æ¯
         if (viewportPosition.x < 0 || viewportPosition.x > 1 || viewportPosition.y < 0 || viewportPosition.y > 1)
         {
             Destroy(gameObject);
@@ -48,17 +48,17 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // ¼ì²â×Óµ¯ÊÇ·ñ»÷ÖĞ¹ÖÎï
+        // æ£€æµ‹å­å¼¹æ˜¯å¦å‡»ä¸­æ€ªç‰©
         if (collision.CompareTag("Enemy"))
         {
-            // ¶Ô¹ÖÎïÔì³ÉÉËº¦
+            // å¯¹æ€ªç‰©é€ æˆä¼¤å®³
             EnemyController enemy = collision.GetComponent<EnemyController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
 
-            // Ïú»Ù×Óµ¯
+            // é”€æ¯å­å¼¹
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Block1") || collision.CompareTag("Block2") || collision.CompareTag("Block3"))

@@ -1,19 +1,19 @@
-// add 24.12.25 ´æ·ÅÓÎÏ·³£ÊıµÄµØ·½ by junpaku
+ï»¿// add 24.12.25 å­˜æ”¾æ¸¸æˆå¸¸æ•°çš„åœ°æ–¹ by junpaku
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameConst
 {
-    // ×Óµ¯ËÙ¶È
+    // å­å¼¹é€Ÿåº¦
     public static float BULLET_SPEED = 10f;
 
-    // ×Óµ¯Éä»÷¼ä¸ô
+    // å­å¼¹å°„å‡»é—´éš”
     public static float BULLET_INTERVAL = 0.4f; 
 
-    // Íæ¼ÒÊÇ·ñÔÚ·½¿éÄÚ²¿
+    // ç©å®¶æ˜¯å¦åœ¨æ–¹å—å†…éƒ¨
     public static bool PLAYER_IS_IN_BLOCK = false;
 
-    // Íæ¼ÒÊÇ·ñËÀÍö
+    // ç©å®¶æ˜¯å¦æ­»äº¡
     public static bool PLAYER_IS_DEAD = false;
 }

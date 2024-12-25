@@ -1,4 +1,4 @@
-// add 24.12.25 ¸ù¾İ·½¿é¸Ä±äÉä»÷ÀàĞÍ by junpaku
+ï»¿// add 24.12.25 æ ¹æ®æ–¹å—æ”¹å˜å°„å‡»ç±»å‹ by junpaku
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
