@@ -14,6 +14,7 @@ public class SpawnTetromino : MonoBehaviour
 
     public void NewTetromino()
     {
-        Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], transform.position, Quaternion.identity);
+       GameObject Blocks =  Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], transform.position, Quaternion.identity);
+        Blocks.transform.parent = GameObject.Find("Blocks").transform;
     }
 }

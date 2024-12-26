@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]public float jumpHeight = 10f;
     [SerializeField]private float moveInput;
     [SerializeField]private bool isGrounded;
+    private Animator Player_animator;
     private Rigidbody2D rb; 
     public Transform groundCheck;
     public LayerMask groundLayer;
     private bool hasTriggered = false;
+    private bool IsHave_Second = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        Player_animator = GetComponent<Animator>();
         // add 24.12.25 开始自动射击 by junpaku
         StartShooting();
         spriteRenderer = GetComponent<SpriteRenderer>(); // 获取玩家的 SpriteRenderer 组件
@@ -38,13 +40,34 @@ public class PlayerController : MonoBehaviour
             moveInput = 0f;
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            Jump();
+            Player_animator.SetTrigger("IsWalk_left");
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            Player_animator.SetTrigger("IsIdle");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Player_animator.SetTrigger("IsWalk_right");
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            Player_animator.SetTrigger("IsIdle");
         }
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.4f, groundLayer);
+        if ((Input.GetButtonDown("Jump") && isGrounded)|| (!IsHave_Second)&& Input.GetButtonDown("Jump"))
+        {
+            Jump();
+            IsHave_Second = true;
+        }
 
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
+        if(isGrounded)
+        {
+            IsHave_Second = false;
+        }
         // add 24.12.25 启动玩家无敌时间 by junpaku
         // 如果玩家处于无敌状态，更新计时器
         if (isInvincible)
@@ -192,7 +215,7 @@ public class PlayerController : MonoBehaviour
         // 实例化子弹
         GameObject bullet = Instantiate(bulletPrefabs[currentBulletIndex], shootPoint.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-
+        bullet.transform.parent = GameObject.Find("Bullets").transform;
         // 设置子弹速度
         float bulletSpeed = GameConst.BULLET_SPEED;
         // 设置子弹伤害

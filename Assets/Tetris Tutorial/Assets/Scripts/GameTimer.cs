@@ -6,7 +6,7 @@ using TMPro;
 public class GameTimer : MonoBehaviour
 {
     public TMP_Text timerText; // 用于显示时间的 UI 文本
-    private float elapsedTime; // 累计的时间
+    public  float elapsedTime; // 累计的时间
 
     void Update()
     {
