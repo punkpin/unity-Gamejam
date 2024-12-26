@@ -37,13 +37,13 @@ public class TetrisBlock : MonoBehaviour
             if (!ValidMove())
                 transform.position -= new Vector3(1, 0, 0);
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow)) //方向键上
-        {
-            //rotate !
-            transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0,0,1), 90);
-            if (!ValidMove())
-                transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
-        }
+        //else if (Input.GetKeyDown(KeyCode.UpArrow)) //方向键上
+        //{
+        //    //rotate !
+        //    transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0,0,1), 90);
+        //    if (!ValidMove())
+        //        transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
+        //}
 
 
         if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 10 : fallTime))  //方向键下
@@ -58,6 +58,7 @@ public class TetrisBlock : MonoBehaviour
 
                 this.enabled = false;
                 FindObjectOfType<SpawnTetromino>().NewTetromino();
+                
 
             }
             previousTime = Time.time;
@@ -75,7 +76,9 @@ public class TetrisBlock : MonoBehaviour
                 // add 24.12.25 by junpaku
                 ScoreManager.Score = ScoreManager.Score + 100;
             }
+            
         }
+        
     }
 
     bool HasLine(int i)
@@ -88,13 +91,23 @@ public class TetrisBlock : MonoBehaviour
 
         return true;
     }
-
     void DeleteLine(int i) 
     {
         for (int j = 0; j < width; j++)
         {
             Destroy(grid[j, i].gameObject);
             grid[j, i] = null;
+        }
+    }
+    public void DeleteAll()
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                Destroy(grid[j, i].gameObject);
+                grid[j, i] = null;
+            }
         }
     }
 
@@ -125,6 +138,11 @@ public class TetrisBlock : MonoBehaviour
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
 
             grid[roundedX, roundedY] = children;
+            if (roundedY >= height - 5)  // 如果方块的y坐标大于或等于网格的高度-1，即已经到达顶端
+            {
+                Debug.Log("failed");  // 触发游戏结束
+
+            }
         }
     }
 
@@ -142,6 +160,7 @@ public class TetrisBlock : MonoBehaviour
 
             if (grid[roundedX, roundedY] != null)
                 return false;
+
         }
 
         return true;
