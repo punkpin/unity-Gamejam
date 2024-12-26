@@ -8,6 +8,14 @@ TagManager:
   - HealthSprite
   - fall_damage
   - ground
+  - Enemy
+  - Block1
+  - Block2
+  - Block3
+  - PlayerHitBox
+  - Block1HitBox
+  - Block2HitBox
+  - Block3HitBox
   layers:
   - Default
   - TransparentFX
