@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb; 
     public Transform groundCheck;
     public LayerMask groundLayer;
+    private bool hasTriggered = false;
 
     void Start()
     {
@@ -223,5 +224,20 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    //新增策划案：当方块接触玩家时玩家受到5点伤害并且该方块消失
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!hasTriggered&&(collision.tag=="Block1HitBox"||collision.tag=="Block2HitBox"|| collision.tag == "Block3HitBox"))
+        {
+            hasTriggered = true;
+            Destroy(collision.transform.parent.parent.gameObject);
+            HealthSystem.Instance.TakeDamage(5f);
+            FindObjectOfType<SpawnTetromino>().NewTetromino();
+
+        }
+    }
+
+
     #endregion
 }

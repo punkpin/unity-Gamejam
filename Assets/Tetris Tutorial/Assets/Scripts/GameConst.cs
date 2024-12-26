@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameConst
 {
+    //1×1，2×2，3×3生成的概率分别为5:3:2
+
     // 子弹速度
     public static float BULLET_SPEED = 10f;
 

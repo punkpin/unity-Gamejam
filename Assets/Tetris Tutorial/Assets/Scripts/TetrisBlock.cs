@@ -47,16 +47,15 @@ public class TetrisBlock : MonoBehaviour
         }
 
 
-        if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 10 : fallTime))  //方向键下
+        if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 5: fallTime))  //方向键下
         {
             transform.position += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
-                // add 24.12.25 玩家被方块压扁即死亡 by junpaku
+               // add 24.12.25 玩家被方块压扁即死亡 by junpaku
                 if (GameConst.PLAYER_IS_IN_BLOCK)
                 {
-                    GameConst.PLAYER_IS_DEAD = true;
-                    Debug.Log("Player is killed by cube");
+                    Destroy(this.gameObject);
                 }
 
                 SetAllChildTrigger();
@@ -177,4 +176,6 @@ public class TetrisBlock : MonoBehaviour
         }
 
     }
+
+    
 }
