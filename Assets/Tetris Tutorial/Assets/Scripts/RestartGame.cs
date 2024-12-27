@@ -24,6 +24,12 @@ public class RestartGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 设置为窗口化模式
+        Screen.fullScreenMode = FullScreenMode.Windowed;
+
+        // 可选：设置窗口大小
+        Screen.SetResolution(540, 1080, false);
+
         local_text = PlayerPrefs.GetInt("HighScore", 0);
     }
 
