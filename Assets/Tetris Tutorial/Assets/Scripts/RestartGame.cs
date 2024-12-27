@@ -62,6 +62,7 @@ public class RestartGame : MonoBehaviour
         {
             // 删除每个子物体
             Destroy(child.gameObject);
+            GameConst.BULLET_POOL_IS_NULL = true;
         }
         foreach (Transform child in Enemys.transform)
         {

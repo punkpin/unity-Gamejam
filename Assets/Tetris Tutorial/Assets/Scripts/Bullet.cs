@@ -1,12 +1,16 @@
-﻿// add 24.12.25 子弹脚本 by junpaku
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private float speed;        // 子弹速度
     private int damage;         // 子弹伤害
     private Vector2 direction;  // 子弹方向
+    private BulletPool bulletPool; // 缓存池引用
+
+    public void Initialize(BulletPool pool)
+    {
+        bulletPool = pool;
+    }
 
     // 设置子弹速度
     public void SetSpeed(float bulletSpeed)
@@ -37,33 +41,31 @@ public class Bullet : MonoBehaviour
 
     void CheckOutOfBounds()
     {
-        // 获取子弹在屏幕上的位置
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
 
-        // 如果超出屏幕范围则销毁
+        // 如果超出屏幕范围则回收到缓存池
         if (viewportPosition.x < 0 || viewportPosition.x > 1 || viewportPosition.y < 0 || viewportPosition.y > 1)
         {
-            Destroy(gameObject);
+            bulletPool.ReturnBullet(gameObject);
         }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 检测子弹是否击中怪物
         if (collision.CompareTag("Enemy"))
         {
-            // 对怪物造成伤害
             EnemyController enemy = collision.GetComponent<EnemyController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
 
-            // 销毁子弹
-            Destroy(gameObject);
+            // 回收子弹
+            bulletPool.ReturnBullet(gameObject);
         }
         else if (collision.CompareTag("Block1") || collision.CompareTag("Block2") || collision.CompareTag("Block3"))
         {
-            Destroy(gameObject);
+            bulletPool.ReturnBullet(gameObject);
         }
     }
 }

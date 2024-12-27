@@ -18,4 +18,7 @@ public class GameConst
 
     // 玩家是否死亡
     public static bool PLAYER_IS_DEAD = false;
+
+    // 子弹池是否为空
+    public static bool BULLET_POOL_IS_NULL = true;
 }

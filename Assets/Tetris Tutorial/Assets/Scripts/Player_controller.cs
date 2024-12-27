@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        FindBulletPool();
     }
 
     void FixedUpdate()
@@ -175,16 +177,19 @@ public class PlayerController : MonoBehaviour
 
     // add 24.12.25 子弹射击功能 by junpaku
     #region 子弹射击功能
-    public GameObject[] bulletPrefabs; // 不同类型的子弹预制体
+    //public GameObject[] bulletPrefabs; // 不同类型的子弹预制体
     public Transform shootPoint;       // 子弹发射点
     public static float bulletSpeed = 10f;    // 子弹速度
 
     private int currentBulletIndex = 0;
     private Coroutine shootingCoroutine;
 
+    private BulletPool bulletPool; // 缓存池引用
+
     // 开始射击
     void StartShooting()
     {
+        FindBulletPool();
         if (shootingCoroutine == null)
         {
             shootingCoroutine = StartCoroutine(AutoShoot());
@@ -213,7 +218,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         // 实例化子弹
-        GameObject bullet = Instantiate(bulletPrefabs[currentBulletIndex], shootPoint.position, Quaternion.identity);
+        GameObject bullet = bulletPool.GetBullet();
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bullet.transform.parent = GameObject.Find("Bullets").transform;
         // 设置子弹速度
@@ -228,25 +233,44 @@ public class PlayerController : MonoBehaviour
             bulletScript.SetSpeed(bulletSpeed);
             bulletScript.SetDamage(bulletDamage);
             bulletScript.SetDirection(direction);
+            bulletScript.Initialize(bulletPool);
         }
+        bullet.transform.position = shootPoint.position;
+        bullet.transform.rotation = shootPoint.rotation;
     }
 
-    // 切换子弹类型
-    void SwitchBullet(int bulletType)
+    // add 24.12.27 增加子弹池对象获取 by junpaku
+    void FindBulletPool()
     {
-        switch (bulletType)
+        if (bulletPool == null)
         {
-            case 0:
-                currentBulletIndex = 0;
-                break;
-            case 1:
-                currentBulletIndex = 1;
-                break;
-            default:
-                currentBulletIndex = 0;
-                break;
+            bulletPool = FindObjectOfType<BulletPool>();
+            if (bulletPool == null)
+            {
+                Debug.Log("获取子弹池失败");
+            }
+        }
+        else
+        {
+            Debug.Log("子弹池为" + bulletPool);
         }
     }
+    // 切换子弹类型
+    //void SwitchBullet(int bulletType)
+    //{
+    //    switch (bulletType)
+    //    {
+    //        case 0:
+    //            currentBulletIndex = 0;
+    //            break;
+    //        case 1:
+    //            currentBulletIndex = 1;
+    //            break;
+    //        default:
+    //            currentBulletIndex = 0;
+    //            break;
+    //    }
+    //}
 
     //新增策划案：当方块接触玩家时玩家受到5点伤害并且该方块消失
     private void OnTriggerEnter2D(Collider2D collision)
