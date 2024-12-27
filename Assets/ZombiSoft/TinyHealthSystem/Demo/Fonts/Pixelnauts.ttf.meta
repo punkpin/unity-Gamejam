@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 810eae3ac5e0d4444a7eb4576a501aa3
+guid: B3sf4Hv4UCpy82Eol1Ukb3wtFbCpU6m0Sw/M8T024BwIe6M2E4/RNHM=
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,12 +8,11 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Pixelnauts
   fontNames:
   - Pixelnauts
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
